@@ -8,6 +8,7 @@ import { addUser } from "../utils/userSlice";
 export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
     const navigate = useNavigate("");
     const dispatch = useDispatch();
 
@@ -20,9 +21,10 @@ export const Login = () => {
             }, { withCredentials: true })
 
             dispatch(addUser(response.data));
-            navigate("/");
+            return navigate("/");
         }
         catch (err) {
+            setError(err?.response?.data || "something went wrong");
             console.log(`error from login.jsx :${err}`);
         }
     }
@@ -43,6 +45,7 @@ export const Login = () => {
                         value={password} onChange={(e) => setPassword(e.target.value)}
                     />
 
+                    <p className="text-red-600">{error}</p>
                     <button className="btn btn-neutral mt-4 hover:bg-gray-700" onClick={handleLogin}>Login</button>
                 </fieldset>
             </div>
