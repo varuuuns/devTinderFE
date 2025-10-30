@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { VITE_BACKEND_URL } from "../config"
 import { addFeed } from "../utils/feedSlice";
 import { useEffect } from "react";
+import { FeedCard } from "./FeedCard";
 
 export const Feed = () => {
     const dispatch = useDispatch();
@@ -28,8 +29,11 @@ export const Feed = () => {
 
 
     return (
+        feed &&
         <>
-
+            <div className="flex justify-center my-10">
+                <FeedCard user={feed[0]} />
+            </div>
         </>
     )
 }
