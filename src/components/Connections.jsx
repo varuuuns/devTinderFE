@@ -25,11 +25,21 @@ export const Connections = () => {
     }, []);
 
     if (!connections) return;
-    if(connections.length===0) 
+    if (connections.length === 0) return <div>No connections</div>
 
     return (
         <>
-
+            <div>
+                <div>Connections</div>
+                {connections.map((connec) => {
+                    <div>
+                        <img className="w-80 h-80" src={connec.photoUrl} alt="pic" />
+                        <h2>{connec.firstName + " " + connec.className}</h2>
+                        <p>{connec.about}</p>
+                        <p>{connec.age + " " + connec.gender}</p>
+                    </div>
+                })}
+            </div>
         </>
     )
 }
