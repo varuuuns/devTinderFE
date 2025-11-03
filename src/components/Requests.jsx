@@ -1,5 +1,4 @@
 import axios from "axios";
-import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addRequests, removeRequest } from "../utils/requestSlice";
 import { useEffect } from "react";
@@ -24,7 +23,7 @@ const Requests = () => {
 
     const fetchRequests = async () => {
         try {
-            const res = await axios.get(BASE_URL + "/user/requests/received", {
+            const res = await axios.get(`${VITE_BACKEND_URL}/user/requests/received`, {
                 withCredentials: true,
             });
 
@@ -53,21 +52,12 @@ const Requests = () => {
                     request.fromUserId;
 
                 return (
-                    <div
-                        key={_id}
-                        className=" flex justify-between items-center m-4 p-4 rounded-lg bg-base-300  mx-auto"
-                    >
+                    <div key={_id} className=" flex justify-between items-center m-4 p-4 rounded-lg bg-base-300  mx-auto">
                         <div>
-                            <img
-                                alt="photo"
-                                className="w-20 h-20 rounded-full"
-                                src={photoUrl}
-                            />
+                            <img alt="photo" className="w-20 h-20 rounded-full" src={photoUrl}/>
                         </div>
                         <div className="text-left mx-4 ">
-                            <h2 className="font-bold text-xl">
-                                {firstName + " " + lastName}
-                            </h2>
+                            <h2 className="font-bold text-xl"> {firstName + " " + lastName} </h2>
                             {age && gender && <p>{age + ", " + gender}</p>}
                             <p>{about}</p>
                         </div>
