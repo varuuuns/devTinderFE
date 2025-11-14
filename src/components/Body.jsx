@@ -1,6 +1,6 @@
 import { Outlet, useNavigate } from "react-router-dom"
-import { Footer } from "./Footer"
-import { Navbar } from "./Navbar"
+import Footer from "./Footer"
+import Navbar from "./Navbar"
 import axios from "axios"
 import { VITE_BACKEND_URL } from "../config"
 import { useDispatch, useSelector } from "react-redux"
@@ -12,31 +12,30 @@ const Body = () => {
     const navigate = useNavigate();
     const userData = useSelector(store => store.user);
 
-    const handleUser = async () => {
+    const fetchUser = async () => {
+        if(userData) return;
         try {
-            const response = await axios.get(`${VITE_BACKEND_URL}/profile/view`, {
-                withCredentials:true
-            })
+            const res = await axios.get(BASE_URL + "/profile/view", { withCredentials: true,});
 
-            dispatch(addUser(response.data));
+            dispatch(addUser(res.data));
         }
         catch (err) {
-            if(err.status === 401) navigate("/login");
-            console.log(`err from body.jsx: ${err}`);
+            if (err.status === 401) navigate("/login");
+            console.error(err);
         }
-    }
+    };
 
 
     useEffect(() => {
-        handleUser();
+        fetchUser();
     }, []);
 
 
-    return(
+    return (
         <>
-            <Navbar/>
-            <Outlet/>
-            <Footer/>
+            <Navbar />
+            <Outlet />
+            <Footer />
         </>
     )
 }
