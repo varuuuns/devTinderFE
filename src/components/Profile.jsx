@@ -5,9 +5,9 @@ const Profile = () => {
     const userData = useSelector(store => store.user);
     return (
         <>
-            userData && (
-            <div> <EditProfile user={userData}/> </div>
-            )
+            {
+                userData && (<div> <EditProfile user={userData} /> </div>)
+            }
         </>
     )
 }

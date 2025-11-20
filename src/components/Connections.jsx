@@ -12,7 +12,7 @@ const Connections = () => {
     const getConnections = async () => {
         try {
             const response = await axios.get(`${VITE_BACKEND_URL}/user/connections`, {
-                withCredenials: true,
+                withCredentials: true,
             })
             dispatch(addConnections(response.data.data));
         }

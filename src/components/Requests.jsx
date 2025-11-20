@@ -11,9 +11,9 @@ const Requests = () => {
 
     const reviewRequest = async (status, _id) => {
         try {
-            const response = await axios.post(`${VITE_BACKEND_URL}/requests/review/${status}/${_id}`, {}, {
-                withCredentials: true,
-            })
+            axios.post(`${VITE_BACKEND_URL}/request/review/${status}/${_id}`, {}, {
+                withCredentials: true
+            });
             dispatch(removeRequest(_id));
         }
         catch (err) {
